@@ -38,24 +38,6 @@ type AppEventsFlushBehavior =
   | 'explicit_only';
 type Params = {[key: string]: string | number};
 
-/**
- * Info about a user to increase chances of matching a Facebook user.
- * See https://developers.facebook.com/docs/app-events/advanced-matching for
- * more info about the expected format of each field.
- */
-type UserData = $ReadOnly<{|
-  email?: ?string,
-  firstName?: ?string,
-  lastName?: ?string,
-  phone?: ?string,
-  dateOfBirth?: ?string,
-  gender?: ?('m' | 'f'),
-  city?: ?string,
-  state?: ?string,
-  zip?: ?string,
-  country?: ?string,
-|}>;
-
 module.exports = {
   /**
    * Sets the current event flushing behavior specifying when events
@@ -135,13 +117,6 @@ module.exports = {
   },
 
   /**
-   * Set additional data about the user to increase chances of matching a Facebook user.
-   */
-  setUserData(userData: UserData) {
-    AppEventsLogger.setUserData(userData);
-  },
-
-  /**
    * For iOS only, sets and sends device token to register the current application for push notifications.
    * @platform ios
    */
@@ -150,9 +125,9 @@ module.exports = {
   },
 
   /**
-   * For Android only, sets and sends registration id to register the current app for push notifications.
-   * @platform Android
-   */
+    * For Android only, sets and sends registration id to register the current app for push notifications.
+    * @platform Android
+    */
   setPushNotificationsRegistrationId(registrationId: string) {
     AppEventsLogger.setPushNotificationsRegistrationId(registrationId);
   },
